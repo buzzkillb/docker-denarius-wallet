@@ -1,7 +1,7 @@
 
-# Unofficial Bitcoin core wallet GUI for docker
+# Unofficial Denarius wallet GUI for docker
 
-Unofficial [bitcoin core](http://www.bitcoincore.org/) wallet GUI docker image to be run standalone or inside a browser window using [Xpra](https://www.xpra.org/).
+Unofficial [Denarius](https://denarius.io) wallet GUI docker image to be run standalone or inside a browser window using [Xpra](https://www.xpra.org/).
 
 Having the wallet available as docker container has some advantages like:
 
@@ -28,16 +28,16 @@ The wallet can be run in two ways:
 
 The `docker-compose` file mounts your X11 session's socket (/tmp/.X11-unix) so the container can connect back to your X server. To start the wallet with `docker-compose`:
 
-    sudo docker-compose -p bitcoin-wallet up
+    sudo docker-compose -p denarius-wallet up
 
 To start the wallet in production mode the the `-d` parameter to the previous
 command:
 
-    sudo docker-compose -p bitcoin-wallet up -d
+    sudo docker-compose -p denarius-wallet up -d
 
 You can see the container logs with this command:
 
-  sudo docker-compose -p bitcoin-wallet logs -f
+  sudo docker-compose -p denarius-wallet logs -f
 
 After the container finish starting up the wallet will show up in your
 screen.
@@ -48,7 +48,7 @@ This is useful to run the wallet (and leave it running if you want) on a remote 
 
 To run the wallet inside a web browser you need to define the environment variable `ENABLE_WEB_VIEW=yes`. Then start the wallet with `docker-compose` as before:
 
-    sudo docker-compose -p bitcoin-wallet up
+    sudo docker-compose -p denarius-wallet up
 
 After some minutes the wallet will be available in http://[host]:10000, were host is the server name or IP address of the server running the wallet container.
 
