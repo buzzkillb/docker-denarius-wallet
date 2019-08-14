@@ -1,7 +1,7 @@
 version: '2'
 services:
   wallet:
-    image: buzzkillb/denarius-wallet:latest
+    image: buzzkillb/denarius-wallet:i2pupdate
     container_name: denarius-wallet
     volumes_from:
     - wallet-data
@@ -15,7 +15,7 @@ services:
 #      - "10000:10000"
 # ight need to run this first - xhost +"local:docker@"
   wallet-data:
-    image: buzzkillb/denarius-wallet:latest
+    image: buzzkillb/denarius-wallet:i2pupdate
     container_name: wallet-data
     volumes:
     - /tmp/.X11-unix:/tmp/.X11-unix
