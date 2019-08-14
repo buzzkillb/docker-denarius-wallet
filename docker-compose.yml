@@ -1,22 +1,24 @@
 version: '2'
 services:
   wallet:
-    image: juanluisbaptiste/bitcoin-wallet:latest
-    container_name: bitcoin-wallet
+    image: buzzkillb/denarius-wallet:latest
+    container_name: denarius-wallet
     volumes_from:
     - wallet-data
     environment:
-      - ENABLE_WEB_VIEW=yes
+      - ENABLE_WEB_VIEW=no
       - DISPLAY=unix$DISPLAY
       - DEBUG=yes
-      - USER_UID=1026
+#      - USER_UID=1026
     network_mode: host
-    # ports:
-    #  - "10000:10000"
+#    ports:
+#      - "10000:10000"
+# ight need to run this first - xhost +"local:docker@"
   wallet-data:
-    image: juanluisbaptiste/bitcoin-wallet:latest
+    image: buzzkillb/denarius-wallet:latest
     container_name: wallet-data
     volumes:
-    -  /tmp/.X11-unix:/tmp/.X11-unix
+    - /tmp/.X11-unix:/tmp/.X11-unix
     - /etc/localtime:/etc/localtime:ro
+    - ~/.denarius:/root/.denarius
     command: /bin/true
