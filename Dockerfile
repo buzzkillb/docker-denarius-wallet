@@ -29,7 +29,7 @@ qt5-default \
 && rm -rf /var/lib/apt/lists/*
 RUN (git clone https://github.com/carsenk/denarius && \
 cd denarius && \
-git checkout v3.4 && \
+git checkout master && \
 git pull && \
 qmake "USE_UPNP=1" "USE_QRCODE=1" denarius-qt.pro && \
 make -j3)
