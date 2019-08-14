@@ -1,5 +1,5 @@
 #!/bin/bash
 env > .envrc
-echo CMD="/home/user/bitcoin-core/bin/bitcoin-qt" >> .envrc
+echo CMD="/usr/local/bin/Denarius" >> .envrc
 
 . /entrypoint.sh
