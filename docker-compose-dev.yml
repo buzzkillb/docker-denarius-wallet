@@ -1,11 +1,11 @@
 version: '2'
 services:
   wallet:
-    image: juanluisbaptiste/bitcoin-wallet:latest
+    image: buzzkillb/denarius-wallet:latest
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: bitcoin-wallet
+    container_name: denarius-wallet
     volumes_from:
     - wallet-data
     environment:
@@ -16,9 +16,10 @@ services:
     # ports:
     #  - "10000:10000"
   wallet-data:
-    image: juanluisbaptiste/bitcoin-wallet:latest
+    image: buzzkillb/denarius-wallet:latest
     container_name: wallet-data
     volumes:
     -  /tmp/.X11-unix:/tmp/.X11-unix
     - /etc/localtime:/etc/localtime:ro
+    - ~/.denarius:/root/.denarius
     command: /bin/true
