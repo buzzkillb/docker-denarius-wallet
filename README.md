@@ -14,7 +14,7 @@ Having the wallet available as docker container has some advantages like:
 
 We use `docker-compose` to build the images. Clone this repository and then:
 
-    cd docker-bitcoin-wallet
+    cd docker-denarius-wallet
     sudo docker-compose -f docker-compose-dev.yml build
 
 ## How to run the Wallet
