@@ -1,4 +1,4 @@
-FROM juanluisbaptiste/xpra-base:latest as builder
+FROM buzzkillb/xpra-base:latest as builder
 #COPY local-entrypoint.sh /
 
 ENV DISPLAY=:100
@@ -34,7 +34,7 @@ git pull && \
 qmake "USE_UPNP=1" "USE_QRCODE=1" denarius-qt.pro && \
 make -j3)
 
-FROM juanluisbaptiste/xpra-base:latest
+FROM buzzkillb/xpra-base:latest
 
 RUN apt-get update && apt-get install -y \
 automake \
