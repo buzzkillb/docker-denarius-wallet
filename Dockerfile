@@ -1,22 +1,64 @@
+FROM juanluisbaptiste/xpra-base:latest as builder
+#COPY local-entrypoint.sh /
+
+ENV DISPLAY=:100
+ENV WEB_VIEW_PORT 10000
+
+RUN apt-get update && apt-get install -y \
+git \
+wget \
+unzip \
+automake \
+build-essential \
+libssl-dev \
+libdb++-dev \
+libboost-all-dev \
+libqrencode-dev \
+libminiupnpc-dev \
+libevent-dev \
+autogen \
+automake \
+libtool \
+make \
+libqt5gui5 \
+libqt5core5a \
+libqt5dbus5 \
+qttools5-dev \
+qttools5-dev-tools \
+qt5-default \
+&& rm -rf /var/lib/apt/lists/*
+RUN (git clone https://github.com/carsenk/denarius && \
+cd denarius && \
+git checkout v3.4 && \
+git pull && \
+qmake "USE_UPNP=1" "USE_QRCODE=1" denarius-qt.pro && \
+make -j3)
+
 FROM juanluisbaptiste/xpra-base:latest
-MAINTAINER Juan Luis Baptiste <juan.baptiste@gmail.com>
-ENV BTC_VERSION "0.18.0"
-ENV BTC_GUI_DOWNLOAD_URL https://bitcoin.org/bin/bitcoin-core-0.18.0/bitcoin-${BTC_VERSION}-x86_64-linux-gnu.tar.gz
+
+RUN apt-get update && apt-get install -y \
+automake \
+build-essential \
+libssl-dev \
+libdb++-dev \
+libboost-all-dev \
+libqrencode-dev \
+libminiupnpc-dev \
+libevent-dev \
+libtool \
+libqt5gui5 \
+libqt5core5a \
+libqt5dbus5 \
+qttools5-dev \
+qttools5-dev-tools \
+qt5-default \
+&& rm -rf /var/lib/apt/lists/*
+
+# final image
+COPY --from=builder /denarius/Denarius /usr/local/bin/
 COPY local-entrypoint.sh /
 
-RUN apt-get update && \
-    apt-get install -y curl zip libfontconfig1 libfreetype6 \
-                       libegl1-mesa libgl1-mesa-glx && \
-    apt-get clean && \
-    chmod 755 /local-entrypoint.sh
-
-USER user
-WORKDIR /home/user
-RUN curl ${BTC_GUI_DOWNLOAD_URL} -O
-RUN tar zxf bitcoin-${BTC_VERSION}-x86_64-linux-gnu.tar.gz && \
-    mv bitcoin-${BTC_VERSION} bitcoin-core && \
-    rm bitcoin-${BTC_VERSION}-x86_64-linux-gnu.tar.gz && \
-    mkdir .bitcoin
+#VOLUME /denarius
 
 CMD ["/local-entrypoint.sh"]
 EXPOSE 10000
