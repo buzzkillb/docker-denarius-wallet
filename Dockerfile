@@ -20,6 +20,7 @@ autogen \
 automake \
 libtool \
 make \
+libcurl4-openssl-dev \
 libqt5gui5 \
 libqt5core5a \
 libqt5dbus5 \
@@ -48,6 +49,7 @@ libevent-dev \
 libtool \
 libqt5gui5 \
 libqt5core5a \
+libcurl4-openssl-dev \
 libqt5dbus5 \
 qttools5-dev \
 qttools5-dev-tools \
